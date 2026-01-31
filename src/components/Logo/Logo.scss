@@ -1,0 +1,44 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.14em;
+  color: #CFCBD6; /* moon silver */
+  user-select: none;
+}
+
+.logo-symbol {
+  font-size: 1.8rem;
+  color: #C9A24D; /* gold */
+  filter: drop-shadow(0 0 10px rgba(201,162,77,0.35));
+}
+
+.logo-text {
+  font-size: 1.1rem;
+}
+
+.logo-accent {
+  color: #E3C98A; /* soft gold */
+}
+
+/* sizes */
+.logo-sm {
+  font-size: 0.85rem;
+}
+
+.logo-md {
+  font-size: 1rem;
+}
+
+.logo-lg {
+  font-size: 4rem;
+}
+
+/* hover – дуже важливо для «магії» */
+.logo:hover .logo-symbol {
+  filter:
+    drop-shadow(0 0 14px rgba(201,162,77,0.6))
+    drop-shadow(0 0 24px rgba(122,108,255,0.4));
+  transition: 0.4s ease;
+}

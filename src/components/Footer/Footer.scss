@@ -1,0 +1,53 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.footer {
+  background: rgba(11, 13, 18, 0.7);
+  backdrop-filter: blur(10px);
+  padding: $spacing-xl 0 $spacing-md;
+  //margin-top: $spacing-xl;
+  border-top: 1px solid rgba(201, 162, 77, 0.2);
+
+  &__content {
+    @include flex-between;
+    flex-wrap: wrap;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__section {
+    flex: 1;
+    min-width: 200px;
+
+    h3 {
+      color: $color-text-primary;
+      margin-bottom: $spacing-sm;
+      font-size: 1.25rem;
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        margin-bottom: $spacing-xs;
+        
+        a {
+          color: $color-text-secondary;
+          font-size: 1.05rem;
+          
+          &:hover {
+            color: $color-accent-gold;
+          }
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    text-align: center;
+    padding-top: $spacing-md;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: $color-text-muted;
+    font-size: 1rem;
+  }
+}

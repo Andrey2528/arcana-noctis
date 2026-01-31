@@ -1,0 +1,90 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.home {
+  &__hero {
+    @include flex-center;
+    flex-direction: column;
+    min-height: 60vh;
+    text-align: center;
+    padding: $spacing-xl 0;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%, $color-glow-violet, transparent 70%);
+      z-index: -1;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin-bottom: $spacing-md;
+      @include gradient-bg;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    p {
+      font-size: 1.35rem;
+      color: $color-text-secondary;
+      max-width: 600px;
+      margin-bottom: 5rem;
+    }
+
+    .cta-button {
+      //@include gradient-bg;
+      padding: $spacing-md $spacing-xl;
+      font-size: 1.25rem;
+      color: $color-text-primary;
+      border-radius: 1rem;
+      
+      &:hover {
+        box-shadow: 0 0 30px rgba(201, 162, 77, 0.35);
+        border: 1px solid #C9A24D;
+      }
+    }
+  }
+
+  &__features {
+    padding: $spacing-xl 0;
+
+    h2 {
+      text-align: center;
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-lg;
+  }
+
+  &__card {
+    @include card;
+    transition: transform $transition-base;
+    
+    &:hover {
+      transform: translateY(-5px);
+      border-color: $color-glow-gold;
+    }
+
+    h3 {
+      color: $color-accent-gold;
+      margin-bottom: $spacing-sm;
+      font-size: 1.5rem;
+    }
+
+    p {
+      color: $color-text-secondary;
+      line-height: 1.7;
+      font-size: 1.1rem;
+    }
+  }
+}

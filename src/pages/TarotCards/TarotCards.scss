@@ -1,0 +1,256 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.tarot-cards {
+  &__hero {
+    text-align: center;
+    padding: $spacing-xl 0;
+    
+    h1 {
+      @include gradient-bg;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      color: $color-text-secondary;
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+
+  &__filters {
+    @include flex-center;
+    gap: $spacing-md;
+    padding: $spacing-lg 0;
+    flex-wrap: wrap;
+
+    button {
+      padding: $spacing-sm $spacing-lg;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(201, 162, 77, 0.3);
+      color: $color-text-secondary;
+      border-radius: $border-radius-md;
+      transition: all $transition-base;
+      font-family: $font-primary;
+      cursor: pointer;
+    font-size: 1.2rem;
+
+      &:hover,
+      &.active {
+        background: $color-accent-gold;
+        color: $color-bg-main;
+        border-color: $color-accent-gold;
+      }
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: $spacing-lg;
+    padding: $spacing-xl 0;
+  }
+
+  &__card {
+    @include card;
+    text-align: center;
+    transition: all $transition-base;
+    cursor: pointer;
+    padding: $spacing-md;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: $color-glow-gold;
+      opacity: 0;
+      transition: opacity $transition-base;
+      z-index: 0;
+    }
+
+    &:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: $color-accent-gold;
+      box-shadow: 0 15px 40px $color-glow-gold;
+
+      &::before {
+        opacity: 0.15;
+      }
+
+      .tarot-cards__card-icon {
+        transform: scale(1.1) rotateY(180deg);
+      }
+    }
+
+    &-icon {
+      font-size: 4rem;
+      margin-bottom: $spacing-sm;
+      display: block;
+      transition: transform 0.6s ease;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    &-number {
+      color: $color-accent-violet;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: $spacing-xs;
+      position: relative;
+      z-index: 1;
+    }
+
+    h3 {
+      color: $color-accent-gold;
+      margin-bottom: $spacing-xs;
+      font-family: $font-heading;
+      font-size: 1.35rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    &-subtitle {
+      color: $color-text-muted;
+      font-size: 1rem;
+      font-style: italic;
+      margin-bottom: $spacing-sm;
+      position: relative;
+      z-index: 1;
+    }
+
+    p {
+      color: $color-text-secondary;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  &__modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    @include flex-center;
+    z-index: 1000;
+    padding: $spacing-md;
+    backdrop-filter: blur(10px);
+
+    &-content {
+      @include card;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    background:
+  radial-gradient(circle at 20% 20%, rgba(122,108,255,0.08), transparent 40%),
+  radial-gradient(circle at 80% 70%, rgba(201,162,77,0.06), transparent 45%),
+  #0B0D12;
+
+
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: $border-radius-sm;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $color-accent-gold;
+        border-radius: $border-radius-sm;
+      }
+    }
+
+    &-close {
+      position: absolute;
+      top: $spacing-md;
+      right: $spacing-md;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: $color-text-primary;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: $font-size-xl;
+      transition: all $transition-fast;
+
+      &:hover {
+        background: $color-accent-crimson;
+      }
+    }
+
+    &-header {
+      text-align: center;
+      margin-bottom: $spacing-lg;
+
+      h2 {
+        @include gradient-bg;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-family: $font-heading;
+        font-size: 2.5rem;
+        margin-bottom: $spacing-xs;
+      }
+
+      .subtitle {
+        color: $color-text-muted;
+        font-style: italic;
+        font-size: 1.25rem;
+      }
+    }
+
+    &-body {
+      h3 {
+        color: $color-accent-gold;
+        margin-top: $spacing-lg;
+        margin-bottom: $spacing-sm;
+        font-size: 1.75rem;
+      }
+
+      p {
+        color: $color-text-secondary;
+        line-height: 1.8;
+        margin-bottom: $spacing-md;
+        font-size: 1.15rem;
+      }
+
+      ul {
+        list-style: none;
+        margin-bottom: $spacing-md;
+
+        li {
+          color: $color-text-secondary;
+          padding-left: $spacing-md;
+          margin-bottom: $spacing-xs;
+          position: relative;
+          font-size: 1.1rem;
+
+          &::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: $color-accent-gold;
+          }
+        }
+      }
+    }
+  }
+}

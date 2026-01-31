@@ -1,0 +1,17 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+      background-image: url('../../assets/bg2.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: top center;
+
+  &__main {
+    flex: 1;
+    //padding: $spacing-lg 0;
+  }
+}

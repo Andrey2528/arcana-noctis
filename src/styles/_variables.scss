@@ -1,0 +1,62 @@
+// Кольори
+$color-bg-main: #0B0D12;      /* глибокий нічний чорний */
+$color-bg-secondary: #131722; /* темний синьо-фіолетовий */
+$color-bg-card: #1A1F2E;      /* фон карт / секцій */
+
+// Тексти
+$color-text-primary: #E6E1D8;  /* теплий світлий */
+$color-text-secondary: #A9A4B2;/* приглушений */
+$color-text-muted: #6F6B7D;   /* підписи, легенди */
+
+// Акценти
+$color-accent-gold: #C9A24D;   /* старе золото */
+$color-accent-violet: #7A6CFF;/* магічний фіолет */
+$color-accent-crimson: #8F2D2D;/* кров / жертва (рідко) */
+
+
+// Ефекти
+$color-glow-gold: rgba(201, 162, 77, 0.35);
+$color-glow-violet: rgba(122, 108, 255, 0.4);
+$color-shadow-deep: rgba(0, 0, 0, 0.7);
+
+
+
+// Розміри
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+
+// Шрифти
+$font-primary: 'Cormorant Garamond', serif;
+$font-heading: 'Cinzel', serif;
+
+
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 2rem;
+
+// Радіуси
+$border-radius-sm: 0.25rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 1rem;
+
+// Тіні
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+
+// Переходи
+$transition-fast: 0.15s ease;
+$transition-base: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// Брейкпоінти
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
