@@ -22,6 +22,132 @@
     }
   }
 
+  &__deck-selector {
+    margin-bottom: $spacing-xl;
+    padding: $spacing-xl;
+    @include card;
+    text-align: center;
+
+    h2 {
+      color: $color-accent-gold;
+      font-family: $font-heading;
+      margin-bottom: $spacing-lg;
+      font-size: 2rem;
+    }
+  }
+
+  &__system-selector {
+    margin-bottom: $spacing-xl;
+    padding: $spacing-xl;
+    @include card;
+    text-align: center;
+    border: 2px solid rgba($color-accent-gold, 0.3);
+
+    h2 {
+      color: $color-accent-gold;
+      font-family: $font-heading;
+      margin-bottom: $spacing-lg;
+      font-size: 2rem;
+    }
+  }
+
+  &__system-buttons {
+    @include flex-center;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
+
+    button {
+      padding: $spacing-md $spacing-xl;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(201, 162, 77, 0.4);
+      color: $color-text-secondary;
+      border-radius: $border-radius-lg;
+      transition: all $transition-base;
+      font-family: $font-heading;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+
+      &:hover {
+        border-color: $color-accent-gold;
+        color: $color-accent-gold;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba($color-accent-gold, 0.2);
+      }
+
+      &.active {
+        background: linear-gradient(135deg, $color-accent-gold, $color-accent-violet);
+        color: $color-bg-main;
+        border-color: transparent;
+        box-shadow: 0 8px 32px rgba($color-accent-gold, 0.5);
+      }
+    }
+  }
+
+  &__deck-buttons {
+    @include flex-center;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+    margin-bottom: $spacing-lg;
+
+    button {
+      padding: $spacing-sm $spacing-lg;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(122, 108, 255, 0.3);
+      color: $color-text-secondary;
+      border-radius: $border-radius-lg;
+      transition: all $transition-base;
+      font-family: $font-primary;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 500;
+
+      &:hover {
+        border-color: $color-accent-violet;
+        color: $color-accent-violet;
+        transform: translateY(-2px);
+      }
+
+      &.active {
+        background: linear-gradient(135deg, $color-accent-violet, $color-accent-gold);
+        color: $color-text-primary;
+        border-color: transparent;
+        box-shadow: 0 8px 24px rgba(122, 108, 255, 0.4);
+      }
+    }
+  }
+
+  &__deck-info {
+    max-width: 800px;
+    margin: 0 auto;
+
+    h3 {
+      color: $color-accent-violet;
+      font-family: $font-heading;
+      margin-bottom: $spacing-xs;
+      font-size: 1.75rem;
+    }
+
+    .deck-meta {
+      color: $color-text-muted;
+      font-size: 1rem;
+      margin-bottom: $spacing-md;
+      font-style: italic;
+
+      span {
+        margin: 0 $spacing-xs;
+      }
+    }
+
+    .deck-description {
+      color: $color-text-secondary;
+      line-height: 1.8;
+      font-size: 1.15rem;
+      text-align: left;
+    }
+  }
+
   &__filters {
     @include flex-center;
     gap: $spacing-md;
@@ -181,7 +307,7 @@
       position: absolute;
       top: $spacing-md;
       right: $spacing-md;
-      background: rgba(255, 255, 255, 0.1);
+      background: transparent;
       border: none;
       color: $color-text-primary;
       width: 40px;
@@ -218,6 +344,28 @@
     }
 
     &-body {
+      .deck-specific-description {
+        background: linear-gradient(135deg, rgba(122, 108, 255, 0.1), rgba(201, 162, 77, 0.1));
+        padding: $spacing-lg;
+        border-radius: $border-radius-md;
+        border-left: 4px solid $color-accent-violet;
+        margin-bottom: $spacing-xl;
+
+        h3 {
+          color: $color-accent-violet;
+          margin-top: 0;
+          margin-bottom: $spacing-md;
+          font-size: 1.5rem;
+        }
+
+        .deck-desc {
+          color: $color-text-primary;
+          font-size: 1.2rem;
+          line-height: 1.9;
+          margin-bottom: 0;
+        }
+      }
+
       h3 {
         color: $color-accent-gold;
         margin-top: $spacing-lg;

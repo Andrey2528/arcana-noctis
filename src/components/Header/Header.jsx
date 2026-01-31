@@ -13,6 +13,7 @@ const Header = () => {
           <NavLink to="/">Головна</NavLink>
           <NavLink to="/tarot-cards">Карти таро</NavLink>
           <NavLink to="/about-tarot">Про таро</NavLink>
+          <NavLink to="/day-card">Карта дня</NavLink>
         </nav>
       </div>
     </header>

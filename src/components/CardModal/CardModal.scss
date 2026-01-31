@@ -1,0 +1,256 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.card-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: $spacing-md;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card-modal {
+  background: linear-gradient(135deg, $color-bg-card 0%, $color-bg-secondary 100%);
+  border-radius: $border-radius-lg;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  border: 1px solid rgba($color-accent-gold, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+              0 0 30px rgba($color-accent-gold, 0.1);
+  animation: slideUp 0.3s ease;
+
+  // Кастомний скролбар
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba($color-bg-main, 0.5);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($color-accent-gold, 0.3);
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba($color-accent-gold, 0.5);
+    }
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.card-modal__close {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  background: rgba($color-bg-main, 0.8);
+  border: 1px solid rgba($color-accent-gold, 0.3);
+  color: $color-text-primary;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1;
+
+  &:hover {
+    background: rgba($color-accent-gold, 0.2);
+    border-color: $color-accent-gold;
+  }
+}
+
+.card-modal__content {
+  display: flex;
+  gap: $spacing-xl;
+  padding: $spacing-xl;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: $spacing-lg;
+  }
+}
+
+.card-modal__image {
+  flex-shrink: 0;
+  width: 280px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: $border-radius-md;
+    border: 2px solid rgba($color-accent-gold, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba($color-accent-gold, 0.1);
+  }
+}
+
+.card-modal__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.card-modal__header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+}
+
+.card-modal__number {
+  font-family: $font-heading;
+  font-size: $font-size-xl;
+  color: $color-accent-gold;
+  font-weight: 600;
+}
+
+.card-modal__title {
+  font-family: $font-heading;
+  font-size: $font-size-3xl;
+  color: $color-text-primary;
+  margin: 0;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    font-size: $font-size-2xl;
+  }
+}
+
+.card-modal__icon {
+  font-size: 2rem;
+}
+
+.card-modal__short-desc {
+  font-size: $font-size-lg;
+  color: $color-accent-violet;
+  font-style: italic;
+  margin: 0;
+  padding: $spacing-sm;
+  background: rgba($color-accent-violet, 0.1);
+  border-radius: $border-radius-sm;
+  border-left: 3px solid $color-accent-violet;
+}
+
+.card-modal__description {
+  p {
+    font-size: $font-size-base;
+    line-height: 1.7;
+    color: $color-text-secondary;
+    margin: 0;
+  }
+}
+
+.card-modal__keywords {
+  h3 {
+    font-family: $font-heading;
+    font-size: $font-size-lg;
+    color: $color-accent-gold;
+    margin: 0 0 $spacing-sm 0;
+  }
+}
+
+.keywords-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+}
+
+.keyword-tag {
+  display: inline-block;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($color-accent-gold, 0.15);
+  color: $color-accent-gold;
+  border-radius: $border-radius-md;
+  font-size: $font-size-sm;
+  border: 1px solid rgba($color-accent-gold, 0.3);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba($color-accent-gold, 0.25);
+    transform: translateY(-2px);
+  }
+}
+
+.card-modal__meanings {
+  display: grid;
+  gap: $spacing-md;
+  margin-top: $spacing-sm;
+
+  @media (min-width: 769px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.meaning-section {
+  h3 {
+    font-family: $font-heading;
+    font-size: $font-size-base;
+    color: $color-text-primary;
+    margin: 0 0 $spacing-sm 0;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  li {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    padding-left: $spacing-md;
+    position: relative;
+
+    &::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: $color-accent-violet;
+    }
+  }
+}

@@ -1,50 +1,132 @@
 import { useState } from 'react';
 import './TarotCards.scss';
-
-import tarotCardsData from '../../db/cardsTaro'
+import CardModal from '../../components/CardModal';
+import tarotCardsData, { tarotDecks } from '../../db/cardsTaro'
+import lenormandCardsData, { lenormandDeck } from '../../db/divination';
 
 
 const TarotCards = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [filter, setFilter] = useState('all');
+  const [selectedDeck, setSelectedDeck] = useState('rider-waite');
+  const [systemType, setSystemType] = useState('tarot'); // 'tarot' or 'lenormand'
 
-  const filteredCards = filter === 'all' 
-    ? tarotCardsData 
-    : tarotCardsData.filter(card => card.category === filter);
+  // Об'єднуємо всі колоди
+  const allDecks = {
+    ...tarotDecks,
+    lenormand: lenormandDeck
+  };
+
+  // Вибираємо дані в залежності від системи
+  const currentCards = systemType === 'lenormand' ? lenormandCardsData : tarotCardsData;
+  
+  const filteredCards = systemType === 'lenormand' 
+    ? currentCards // Ленорман не має фільтрів major/minor
+    : (filter === 'all' 
+        ? currentCards 
+        : currentCards.filter(card => card.category === filter));
+
+  const currentDeck = allDecks[selectedDeck];
 
   return (
     <div className="tarot-cards">
       <section className="tarot-cards__hero">
         <div className="container">
-          <h1>Карти Таро</h1>
+          <h1>Карти Таро та Ленорман</h1>
           <p>
-            Дослідіть містичний світ Таро. Кожна карта - це ключ до розуміння 
+            Дослідіть містичний світ ворожіння на картах. Кожна карта - це ключ до розуміння 
             себе та свого шляху. Виберіть карту, щоб дізнатися її значення.
           </p>
         </div>
       </section>
 
       <section className="container">
-        <div className="tarot-cards__filters">
-          <button 
-            className={filter === 'all' ? 'active' : ''} 
-            onClick={() => setFilter('all')}
-          >
-            Усі карти
-          </button>
-          <button 
-            className={filter === 'major' ? 'active' : ''} 
-            onClick={() => setFilter('major')}
-          >
-            Старші Аркани
-          </button>
-          <button 
-            className={filter === 'minor' ? 'active' : ''} 
-            onClick={() => setFilter('minor')}
-          >
-            Молодші Аркани
-          </button>
+        {/* Перемикач системи ворожіння */}
+        <div className="tarot-cards__system-selector">
+          <h2>Оберіть систему ворожіння</h2>
+          <div className="tarot-cards__system-buttons">
+            <button
+              className={systemType === 'tarot' ? 'active' : ''}
+              onClick={() => {
+                setSystemType('tarot');
+                setSelectedDeck('rider-waite');
+                setFilter('all');
+              }}
+            >
+              Таро (78 карт)
+            </button>
+            <button
+              className={systemType === 'lenormand' ? 'active' : ''}
+              onClick={() => {
+                setSystemType('lenormand');
+                setSelectedDeck('lenormand');
+                setFilter('all');
+              }}
+            >
+              Ленорман (36 карт)
+            </button>
+          </div>
         </div>
+
+        {/* Перемикач колод */}
+        {systemType === 'tarot' && (
+          <div className="tarot-cards__deck-selector">
+            <h2>Оберіть колоду Таро</h2>
+            <div className="tarot-cards__deck-buttons">
+              {Object.values(tarotDecks).map((deck) => (
+                <button
+                  key={deck.id}
+                  className={selectedDeck === deck.id ? 'active' : ''}
+                  onClick={() => setSelectedDeck(deck.id)}
+                >
+                  {deck.nameUk}
+                </button>
+              ))}
+            </div>
+            <div className="tarot-cards__deck-info">
+              <h3>{currentDeck.nameUk} ({currentDeck.name})</h3>
+              <p className="deck-meta">
+                <span>{currentDeck.author}</span> • <span>{currentDeck.year}</span>
+              </p>
+              <p className="deck-description">{currentDeck.description}</p>
+            </div>
+          </div>
+        )}
+
+        {systemType === 'lenormand' && (
+          <div className="tarot-cards__deck-selector">
+            <div className="tarot-cards__deck-info">
+              <h3>{lenormandDeck.nameUk} ({lenormandDeck.name})</h3>
+              <p className="deck-meta">
+                <span>{lenormandDeck.author}</span> • <span>{lenormandDeck.year}</span> • <span>{lenormandDeck.totalCards} карт</span>
+              </p>
+              <p className="deck-description">{lenormandDeck.description}</p>
+            </div>
+          </div>
+        )}
+
+        {systemType === 'tarot' && (
+          <div className="tarot-cards__filters">
+            <button 
+              className={filter === 'all' ? 'active' : ''} 
+              onClick={() => setFilter('all')}
+            >
+              Усі карти
+            </button>
+            <button 
+              className={filter === 'major' ? 'active' : ''} 
+              onClick={() => setFilter('major')}
+            >
+              Старші Аркани
+            </button>
+            <button 
+              className={filter === 'minor' ? 'active' : ''} 
+              onClick={() => setFilter('minor')}
+            >
+              Молодші Аркани
+            </button>
+          </div>
+        )}
 
         <div className="tarot-cards__grid">
           {filteredCards.map((card) => (
@@ -64,62 +146,11 @@ const TarotCards = () => {
       </section>
 
       {selectedCard && (
-        <div className="tarot-cards__modal" onClick={() => setSelectedCard(null)}>
-          <div className="tarot-cards__modal-content" onClick={(e) => e.stopPropagation()}>
-            <button 
-              className="tarot-cards__modal-close"
-              onClick={() => setSelectedCard(null)}
-            >
-              ×
-            </button>
-            
-            <div className="tarot-cards__modal-header">
-              <img 
-                src={selectedCard.image} 
-                alt={selectedCard.name}
-                className="tarot-cards__modal-image"
-                style={{ 
-                  maxWidth: '300px', 
-                  height: 'auto', 
-                  marginBottom: '1rem',
-                  borderRadius: '12px',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)'
-                }}
-              />
-              <h2>{selectedCard.number}. {selectedCard.name}</h2>
-              <div className="subtitle">{selectedCard.nameEn}</div>
-            </div>
-
-            <div className="tarot-cards__modal-body">
-              <p>{selectedCard.description}</p>
-
-              <h3>Ключові слова</h3>
-              <ul>
-                {selectedCard.keywords.map((keyword, index) => (
-                  <li key={index}>{keyword}</li>
-                ))}
-              </ul>
-
-              <h3>Пряме положення</h3>
-              <ul>
-                {selectedCard.upright.map((meaning, index) => (
-                  <li key={index}>{meaning}</li>
-                ))}
-              </ul>
-
-              {selectedCard.reversed && (
-                <>
-                  <h3>Перевернуте положення</h3>
-                  <ul>
-                    {selectedCard.reversed.map((meaning, index) => (
-                      <li key={index}>{meaning}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
+        <CardModal 
+          card={selectedCard} 
+          onClose={() => setSelectedCard(null)} 
+          selectedDeck={selectedDeck}
+        />
       )}
     </div>
   );
