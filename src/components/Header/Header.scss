@@ -21,6 +21,29 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    z-index: 101;
+  }
+
+  &__burger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 101;
+
+    span {
+      width: 24px;
+      height: 2px;
+      background: $color-accent-gold;
+      transition: all $transition-fast;
+    }
+
+    @media (max-width: 768px) {
+      display: flex;
+    }
   }
 
   &__nav {
@@ -36,6 +59,67 @@
       &:hover,
       &.active {
         color: $color-accent-gold;
+      }
+    }
+
+    @media (max-width: 768px) {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 70%;
+      height: 100vh;
+      background: rgba(19, 23, 34, 0.98);
+      backdrop-filter: blur(10px);
+      flex-direction: column;
+      padding: 80px 30px 30px;
+      gap: $spacing-xl;
+      transition: left 0.3s ease;
+      z-index: 100;
+      border-right: 1px solid rgba(201, 162, 77, 0.2);
+
+      &--open {
+        left: 0;
+      }
+
+      a {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  &__lang {
+    display: flex;
+    gap: $spacing-sm;
+
+    button {
+      background: transparent;
+      border: 1px solid rgba(201, 162, 77, 0.3);
+      color: $color-text-secondary;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all $transition-fast;
+      font-size: 0.9rem;
+
+      &:hover {
+        border-color: $color-accent-gold;
+        color: $color-accent-gold;
+      }
+
+      &.active {
+        background: $color-accent-gold;
+        color: $color-bg-main;
+        border-color: $color-accent-gold;
+      }
+    }
+
+    @media (max-width: 768px) {
+      gap: 0.3rem;
+
+      button {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
       }
     }
   }

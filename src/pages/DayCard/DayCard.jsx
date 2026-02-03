@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
 import tarotCardsData from '../../db/cardsTaro';
 import CardModal from '../../components/CardModal';
+import { useTranslation } from 'react-i18next';
 import './DayCard.scss';
 
 const DayCard = () => {
+    const { t } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  }
   const [selectedCards, setSelectedCards] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [modalCard, setModalCard] = useState(null);
@@ -12,7 +17,7 @@ const DayCard = () => {
   // Перевіряємо чи вже вибрана карта сьогодні
   useEffect(() => {
     const today = new Date().toDateString();
-    const savedData = localStorage.getItem('dayCardData');
+    const savedData = localStorage.getItem("dayCardData");
     
     if (savedData) {
       const { date, cardIndex, cards } = JSON.parse(savedData);
@@ -62,11 +67,11 @@ const DayCard = () => {
     <div className="day-card">
       <div className="container">
         <div className="day-card__header">
-          <h1 className="day-card__title">Карта дня</h1>
+          <h1 className="day-card__title">{t("dayCard.title")}</h1>
           <p className="day-card__subtitle">
             {canSelect 
-              ? 'Виберіть одну карту, яка підкаже вам напрямок на сьогодні'
-              : 'Ви вже обрали свою карту на сьогодні. Повертайтеся завтра!'}
+              ? t("dayCard.description")
+              : t("dayCard.alreadySelected")}
           </p>
         </div>
 
@@ -103,12 +108,12 @@ const DayCard = () => {
 
         {selectedIndex !== null && (
           <div className="day-card__info">
-            <p>Ваша карта дня: <strong>{selectedCards[selectedIndex]?.name}</strong></p>
+            <p>{t("dayCard.selectCard")}: <strong>{selectedCards[selectedIndex]?.name}</strong></p>
             <button 
               className="day-card__view-details" 
               onClick={() => setModalCard(selectedCards[selectedIndex])}
             >
-              Переглянути деталі
+              {t("common.viewDetails")}
             </button>
           </div>
         )}

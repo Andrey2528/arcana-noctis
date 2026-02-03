@@ -1,0 +1,116 @@
+{
+  "header": {
+    "home": "Home",
+    "tarotCards": "Tarot Cards",
+    "aboutTarot": "About Tarot",
+    "dayCard": "Card of the Day"
+  },
+  "home": {
+    "title": "Arcana Noctis",
+    "subtitle": "The Magic of Tarot in the Darkness of Night",
+    "description": "Discover the secrets of the night and explore the magical world of endless possibilities"
+  },
+  "tarotCards": {
+    "title": "Tarot Cards and Lenormand",
+    "description": "Explore the mystical world of card divination. Each card is a key to understanding yourself and your path. Choose a card to learn its meaning.",
+    "chooseSystem": "Choose a card system",
+    "tarotSystems": "Tarot",
+    "lenormandSystem": "Lenormand",
+    "chooseTaroDesck": "Choose a Tarot deck"
+  },
+  "aboutTarot": {
+    "title": "About Tarot",
+    "description": "A journey through the ages of mystical wisdom and self-discovery",
+    "historyTitle": "History of Tarot",
+    "history": {
+      "1": {
+        "year": "15th Century",
+        "title": "Birth of Tarot",
+        "description": "The first mentions of Tarot cards appear in Renaissance Italy. Initially, they were used as ordinary playing cards among the aristocracy. The oldest surviving decks are the Visconti-Sforza Tarot, created for Milanese nobility."
+      },
+      "2": {
+        "year": "16th-17th Century",
+        "title": "Spread Across Europe",
+        "description": "Tarot spreads throughout Europe, especially in France and Switzerland. The first standardized decks appear, including the Marseille Tarot. Cards are mainly used for games, but occult interpretations begin to emerge."
+      },
+      "3": {
+        "year": "18th Century",
+        "title": "Mystical Reinterpretation",
+        "description": "French occultists, notably Antoine Court de Gébelin, began attributing ancient Egyptian origins and esoteric meanings to Tarot cards. This laid the foundation for the modern tradition of Tarot divination."
+      },
+      "4": {
+        "year": "19th Century",
+        "title": "Golden Age of Occultism",
+        "description": "Tarot becomes an integral part of Western esotericism. Éliphas Lévi connects the cards with Kabbalah and the Hebrew alphabet. New esoteric decks are created. The Hermetic Order of the Golden Dawn is founded, developing a complex system of Tarot correspondences."
+      },
+      "5": {
+        "year": "Early 20th Century",
+        "title": "Rider-Waite Tarot",
+        "description": "In 1909, the Rider-Waite deck is published, created by Arthur Edward Waite and artist Pamela Colman Smith. It becomes the most influential deck of the 20th century thanks to detailed illustrations on all cards, including the Minor Arcana."
+      },
+      "6": {
+        "year": "Mid-20th Century",
+        "title": "Psychological Approach",
+        "description": "Carl Jung and his followers interpret Tarot through the lens of depth psychology and archetypes. Tarot begins to be seen as a tool for self-knowledge and psychological work, not just divination."
+      },
+      "7": {
+        "year": "Modern Era",
+        "title": "Creative Flourishing",
+        "description": "Thousands of custom decks appear for every taste: from traditional to avant-garde, from fantasy to minimalist. Tarot becomes mainstream, used for meditation, creativity, coaching, and personal development."
+      }
+    },
+    "structureTarot": {
+        "title": "Structure of Tarot",
+
+        "majorArcanaDesc1": "22 cards from The Fool (0) to The World (XXI)",
+        "majorArcanaDesc2": "Represent important life lessons",
+        "majorArcanaDesc3": "Symbolize the spiritual path of a person",
+        "majorArcanaDesc4": "Archetypes of the collective unconscious",
+        "minorArcanaDesc1": "56 cards in four suits",
+        "minorArcanaDesc2": "Wands (fire) - action, passion",
+        "minorArcanaDesc3": "Cups (water) - emotions, relationships",
+        "minorArcanaDesc4": "Swords (air) - intellect, conflicts",
+        "minorArcanaDesc5": "Pentacles (earth) - material, practical",
+        "courtCardsDesc1": "Page - beginning, learning, messages",
+        "courtCardsDesc2": "Knight - action, movement, quest",
+        "courtCardsDesc3": "Queen - intuition, care, emotions",
+        "courtCardsDesc4": "King - power, responsibility, structure"
+    },
+    "philosophyTarot": {
+      "title": "Philosophy of Tarot",
+      "description1": "Tarot is not just a tool for divination, but a system of symbols that helps us understand the deep patterns of our life and subconscious.",
+      "description2": "Each card contains multilayered symbolism combining astrological, numerological, kabbalistic, and archetypal meanings. Working with Tarot is a dialogue with one's own soul.",
+      "description3": "Modern practices use Tarot for meditation, self-analysis, creative inspiration, and psychological development. It is a tool that helps us ask the right questions and find answers within ourselves.",
+      "descriptionAccent": "Tarot does not predict the future - it helps us create it"
+    }
+  },
+  "dayCard": {
+    "title": "Card of the Day",
+    "description": "Choose one card that will guide you for today",
+    "alreadySelected": "You have already chosen your card for today. Come back tomorrow!",
+    "drawCard": "Draw Card",
+    "selectCard": "Your Card of the Day"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "description": "Explore the magical world of tarot with Arcana Noctis",
+    "contacts": "Contacts",
+    "author": "Author"
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "back": "Back",
+    "next": "Next",
+    "close": "Close",
+    "viewDetails": "View Details",
+                "majorArcana": "Major Arcana",
+        "minorArcana": "Minor Arcana",
+        "courtCards": "Court Cards",
+        "allCadrs": "All Cards"
+  },
+    "modal": {
+    "keyMeanings": "Key Meanings",
+    "uprightPosition": "Upright Position",
+    "reversedPosition": "Reversed Position"
+  }
+}

@@ -1,0 +1,139 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.tarot-history {
+  padding: $spacing-xl 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      $color-accent-gold 10%,
+      $color-accent-gold 90%,
+      transparent
+    );
+    transform: translateX(-50%);
+
+    @media (max-width: $breakpoint-md) {
+      left: $spacing-md;
+    }
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+    color: $color-accent-gold;
+    font-family: $font-heading;
+    @include gradient-bg;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__timeline {
+    position: relative;
+  }
+
+  &__item {
+    position: relative;
+    margin-bottom: $spacing-xl;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: $breakpoint-md) {
+      padding-left: calc($spacing-md * 2);
+    }
+
+    &:nth-child(odd) {
+      flex-direction: row-reverse;
+      text-align: right;
+
+      @media (max-width: $breakpoint-md) {
+        flex-direction: row;
+        text-align: left;
+      }
+
+      .tarot-history__content {
+        margin-right: calc(50% + $spacing-lg);
+
+        @media (max-width: $breakpoint-md) {
+          margin-right: 0;
+          margin-left: 0;
+        }
+      }
+    }
+
+    &:nth-child(even) {
+      .tarot-history__content {
+        margin-left: calc(50% + $spacing-lg);
+
+        @media (max-width: $breakpoint-md) {
+          margin-left: 0;
+        }
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: $color-accent-gold;
+      border-radius: 50%;
+      border: 4px solid $color-bg-main;
+      box-shadow: 0 0 20px $color-glow-gold;
+      z-index: 1;
+
+      @media (max-width: $breakpoint-md) {
+        left: $spacing-md;
+      }
+    }
+  }
+
+  &__year {
+    color: $color-accent-violet;
+    font-size: 2.25rem;
+    font-weight: 700;
+    font-family: $font-heading;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__content {
+    @include card;
+    width: 45%;
+    transition: all $transition-base;
+
+    @media (max-width: $breakpoint-md) {
+      width: calc(100% - $spacing-md * 3);
+    }
+
+    &:hover {
+      transform: scale(1.02);
+      border-color: $color-accent-gold;
+      box-shadow: 0 10px 30px $color-glow-gold;
+    }
+  }
+
+  &__item-title {
+    color: $color-accent-gold;
+    font-size: 1.5rem;
+    margin-bottom: $spacing-sm;
+    font-family: $font-heading;
+  }
+
+  &__description {
+    color: $color-text-primary;
+    line-height: 1.7;
+    font-size: 1.1rem;
+  }
+}
+

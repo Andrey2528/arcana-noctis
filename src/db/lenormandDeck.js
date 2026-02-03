@@ -481,4 +481,5 @@ const lenormandCardsData = [
   }
 ];
 
+export { lenormandCardsData };
 export default lenormandCardsData;

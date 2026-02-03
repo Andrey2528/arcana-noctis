@@ -1,24 +1,46 @@
 import { useState } from 'react';
 import './TarotCards.scss';
 import CardModal from '../../components/CardModal';
-import tarotCardsData, { tarotDecks } from '../../db/cardsTaro'
-import lenormandCardsData, { lenormandDeck } from '../../db/divination';
-
+import { tarotCardsData } from '../../db/cardsTaro'
+import lenormandCardsData, { lenormandDeck } from '../../db/lenormandDeck';
+import { useTranslation } from 'react-i18next';
+import { useTranslatedCards, useTranslatedDecks } from '../../hooks/useTarotCards';
 
 const TarotCards = () => {
+  const { t } = useTranslation();
+  const { t: tCards } = useTranslation('tarotCards'); // Окремий t для карт
   const [selectedCard, setSelectedCard] = useState(null);
   const [filter, setFilter] = useState('all');
   const [selectedDeck, setSelectedDeck] = useState('rider-waite');
   const [systemType, setSystemType] = useState('tarot'); // 'tarot' or 'lenormand'
+  
+  // Отримуємо карти з перекладами залежно від типу системи
+  const translatedTarotCards = useTranslatedCards('tarot');
+  const translatedLenormandCards = useTranslatedCards('lenormand');
+  const translatedDecks = useTranslatedDecks();
+  
+  // Створюємо об'єкт колод для зручності
+  const tarotDecksMap = translatedDecks.reduce((acc, deck) => {
+    acc[deck.id] = deck;
+    return acc;
+  }, {});
+
+  // Для Ленорман отримуємо переклад з JSON
+  const lenormandDeckTranslated = {
+    id: 'lenormand',
+    name: tCards('lenormand.deck.name', lenormandDeck.nameUk),
+    description: tCards('lenormand.deck.description', lenormandDeck.description),
+    author: tCards('lenormand.deck.author', lenormandDeck.author)
+  };
 
   // Об'єднуємо всі колоди
   const allDecks = {
-    ...tarotDecks,
-    lenormand: lenormandDeck
+    ...tarotDecksMap,
+    lenormand: lenormandDeckTranslated
   };
 
   // Вибираємо дані в залежності від системи
-  const currentCards = systemType === 'lenormand' ? lenormandCardsData : tarotCardsData;
+  const currentCards = systemType === 'lenormand' ? translatedLenormandCards : translatedTarotCards;
   
   const filteredCards = systemType === 'lenormand' 
     ? currentCards // Ленорман не має фільтрів major/minor
@@ -32,10 +54,9 @@ const TarotCards = () => {
     <div className="tarot-cards">
       <section className="tarot-cards__hero">
         <div className="container">
-          <h1>Карти Таро та Ленорман</h1>
+          <h1>{t('tarotCards.title')}</h1>
           <p>
-            Дослідіть містичний світ ворожіння на картах. Кожна карта - це ключ до розуміння 
-            себе та свого шляху. Виберіть карту, щоб дізнатися її значення.
+            {t('tarotCards.description')}
           </p>
         </div>
       </section>
@@ -43,7 +64,7 @@ const TarotCards = () => {
       <section className="container">
         {/* Перемикач системи ворожіння */}
         <div className="tarot-cards__system-selector">
-          <h2>Оберіть систему ворожіння</h2>
+          <h2>{t('tarotCards.chooseSystem')}</h2>
           <div className="tarot-cards__system-buttons">
             <button
               className={systemType === 'tarot' ? 'active' : ''}
@@ -53,7 +74,7 @@ const TarotCards = () => {
                 setFilter('all');
               }}
             >
-              Таро (78 карт)
+              {t('tarotCards.tarotSystems')} (78 карт)
             </button>
             <button
               className={systemType === 'lenormand' ? 'active' : ''}
@@ -63,7 +84,7 @@ const TarotCards = () => {
                 setFilter('all');
               }}
             >
-              Ленорман (36 карт)
+              {t('tarotCards.lenormandSystem')} (36 карт)
             </button>
           </div>
         </div>
@@ -71,22 +92,22 @@ const TarotCards = () => {
         {/* Перемикач колод */}
         {systemType === 'tarot' && (
           <div className="tarot-cards__deck-selector">
-            <h2>Оберіть колоду Таро</h2>
+            <h2>{t('tarotCards.chooseTaroDesck')}</h2>
             <div className="tarot-cards__deck-buttons">
-              {Object.values(tarotDecks).map((deck) => (
+              {translatedDecks.map((deck) => (
                 <button
                   key={deck.id}
                   className={selectedDeck === deck.id ? 'active' : ''}
                   onClick={() => setSelectedDeck(deck.id)}
                 >
-                  {deck.nameUk}
+                  {deck.name}
                 </button>
               ))}
             </div>
             <div className="tarot-cards__deck-info">
-              <h3>{currentDeck.nameUk} ({currentDeck.name})</h3>
+              <h3>{currentDeck.name}</h3>
               <p className="deck-meta">
-                <span>{currentDeck.author}</span> • <span>{currentDeck.year}</span>
+                <span>{currentDeck.author}</span>
               </p>
               <p className="deck-description">{currentDeck.description}</p>
             </div>
@@ -96,11 +117,11 @@ const TarotCards = () => {
         {systemType === 'lenormand' && (
           <div className="tarot-cards__deck-selector">
             <div className="tarot-cards__deck-info">
-              <h3>{lenormandDeck.nameUk} ({lenormandDeck.name})</h3>
+              <h3>{lenormandDeckTranslated.name}</h3>
               <p className="deck-meta">
-                <span>{lenormandDeck.author}</span> • <span>{lenormandDeck.year}</span> • <span>{lenormandDeck.totalCards} карт</span>
+                <span>{lenormandDeckTranslated.author}</span> • <span>{lenormandDeck.year}</span> • <span>{lenormandDeck.totalCards} {t('tarotCards.cards')}</span>
               </p>
-              <p className="deck-description">{lenormandDeck.description}</p>
+              <p className="deck-description">{lenormandDeckTranslated.description}</p>
             </div>
           </div>
         )}
@@ -111,19 +132,19 @@ const TarotCards = () => {
               className={filter === 'all' ? 'active' : ''} 
               onClick={() => setFilter('all')}
             >
-              Усі карти
+              {t('common.allCadrs')}
             </button>
             <button 
               className={filter === 'major' ? 'active' : ''} 
               onClick={() => setFilter('major')}
             >
-              Старші Аркани
+              {t('common.majorArcana')}
             </button>
             <button 
               className={filter === 'minor' ? 'active' : ''} 
               onClick={() => setFilter('minor')}
             >
-              Молодші Аркани
+              {t('common.minorArcana')}
             </button>
           </div>
         )}
@@ -138,7 +159,6 @@ const TarotCards = () => {
               <img className="tarot-cards__card-icon" src={card.image} alt={card.name} />
               <div className="tarot-cards__card-number">{card.number}</div>
               <h3>{card.name}</h3>
-              <div className="tarot-cards__card-subtitle">{card.nameEn}</div>
               <p>{card.shortDesc}</p>
             </div>
           ))}

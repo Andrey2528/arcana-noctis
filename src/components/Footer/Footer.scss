@@ -7,6 +7,14 @@
   padding: $spacing-xl 0 $spacing-md;
   //margin-top: $spacing-xl;
   border-top: 1px solid rgba(201, 162, 77, 0.2);
+  .header__logo {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    @include gradient-bg;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
   &__content {
     @include flex-between;

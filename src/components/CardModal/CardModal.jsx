@@ -1,7 +1,12 @@
 import { useEffect } from 'react';
 import './CardModal.scss';
+import { useTranslation } from 'react-i18next';
 
 const CardModal = ({ card, onClose, selectedDeck }) => {
+      const { t } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  }
   useEffect(() => {
     // Блокуємо скролл body коли модалка відкрита
     document.body.style.overflow = 'hidden';
@@ -42,7 +47,7 @@ const CardModal = ({ card, onClose, selectedDeck }) => {
             </div>
             
             <div className="card-modal__keywords">
-              <h3>Ключові слова:</h3>
+              <h3>{t("modal.keyMeanings")}:</h3>
               <div className="keywords-list">
                 {card.keywords.map((keyword, index) => (
                   <span key={index} className="keyword-tag">
@@ -54,7 +59,7 @@ const CardModal = ({ card, onClose, selectedDeck }) => {
             
             <div className="card-modal__meanings">
               <div className="meaning-section">
-                <h3>Пряме положення:</h3>
+                <h3>{t("modal.uprightPosition")}:</h3>
                 <ul>
                   {card.upright.map((meaning, index) => (
                     <li key={index}>{meaning}</li>
@@ -63,7 +68,7 @@ const CardModal = ({ card, onClose, selectedDeck }) => {
               </div>
               
               <div className="meaning-section">
-                <h3>Перевернуте положення:</h3>
+                <h3>{t("modal.reversedPosition")}:</h3>
                 <ul>
                   {card.reversed.map((meaning, index) => (
                     <li key={index}>{meaning}</li>

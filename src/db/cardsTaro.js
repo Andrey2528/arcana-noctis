@@ -1987,4 +1987,5 @@ const tarotCardsData = [
   }
 ];
 
+export { tarotCardsData };
 export default tarotCardsData;
